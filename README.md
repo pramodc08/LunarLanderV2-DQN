@@ -12,6 +12,10 @@ Any of the four methods can be used in this project:
 3. Dueling Deep Q Learning
 4. Double Dueling Deep Q Learning
 
+Before training            |
+:-------------------------:|
+![](assets/before-training.gif) 
+
 ## Environment
 
 The Agent's interaction with the Environment is based on the following four discrete actions:
@@ -54,7 +58,7 @@ pip install -r requirements.txt
 ```
 
 ## Arguments
-```shell
+```
 python main.py
 usage: main.py [-h] [-a ] [-n ] [-t ] [--seed ] [--scores_window ] [--n_games ] [--limit_steps ] [--gamma ]
                [--epsilon ] [--eps_end ] [--eps_dec ] [--batch_size ] [--n_epochs ] [--update_every ]
