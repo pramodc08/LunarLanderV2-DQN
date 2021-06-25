@@ -2,6 +2,8 @@
 - 👀 I’m interested in AI🧠 and Robotics🤖
 - 🌱 I’m currently learning Deep Reinforcement Learning
 - 💞️ I’m looking to collaborate on more Reinforcement Learning Projects
+- ✔  [DQN](https://tnsor06.github.io/LunarLanderV2-DQN/) 
+- 🚧 More DQN Projects on the way
 
 # LunarLander-v2 Deep Reinforcement Learning
 
@@ -12,9 +14,9 @@ Any of the four methods can be used in this project:
 3. Dueling Deep Q Learning
 4. Double Dueling Deep Q Learning
 
-Before training            |
-:-------------------------:|
-![](assets/before-training.gif) 
+|Before training            |
+|:-------------------------:|
+|![](assets/before-training.gif)| 
 
 ## Environment
 
