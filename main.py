@@ -38,9 +38,9 @@ def run(params):
             next_obs, reward, done, info = env.step(action)
             n_steps += 1
             i_step += 1
-            # Reward Punishing for Moving Vertically, Velocity Vertical and Horizontal away from zero
+            # Reward Punishing for Moving Vertically away from zero
             # Range is [-1.00 to +1.00] with center at zero to maximize efficiency
-            reward -= (abs(obs[0]) + abs(obs[2]) + abs(obs[3]))*0.02
+            reward -= abs(obs[0])*0.05
             score += reward
             if not params['test_mode']:
                 agent.step(obs, action, reward, next_obs, done)
@@ -48,6 +48,7 @@ def run(params):
                 frame_ = env.render(mode="rgb_array")
                 frame = cv2.cvtColor(frame_, cv2.COLOR_RGB2BGR) 
                 font = cv2.FONT_HERSHEY_SIMPLEX
+                frame = cv2.putText(frame,f'{agent.agent_name}',(450,20), font, 0.6, (0,165,255), 2, cv2.LINE_AA)
                 frame = cv2.putText(frame,f'Episode: {i}',(10,20), font, 0.75, (0,165,255), 2, cv2.LINE_AA)
                 frame = cv2.putText(frame,f'Score: {score:.2f}',(10,60), font, 0.75, (0,165,255), 2, cv2.LINE_AA)
                 if len(scores)>0:

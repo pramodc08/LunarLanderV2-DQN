@@ -2,7 +2,7 @@
 - 👀 I’m interested in AI🧠 and Robotics🤖
 - 🌱 I’m currently learning Deep Reinforcement Learning
 - 💞️ I’m looking to collaborate on more Reinforcement Learning Projects
-- ✔  [DQN](https://tnsor06.github.io/LunarLanderV2-DQN/) 
+- ✔  [DQN + Double DQN + Dueling DQN + Double Dueling DQN](https://tnsor06.github.io/LunarLanderV2-DQN/) 
 - 🚧 More DQN Projects on the way
 
 # LunarLander-v2 Deep Reinforcement Learning
@@ -43,15 +43,23 @@ Normally, LunarLander-v2 defines "solving" as getting an average reward of 200 o
 
 ```python
 # main.py at line 36
-# Reward Punishing for Moving Vertically, Velocity Vertical and Horizontal away from zero
+# Reward Punishing for Moving Vertically away from zero
 # Range is [-1.00 to +1.00] with center at zero to maximize efficiency
-reward -= (abs(obs[0]) + abs(obs[2]) + abs(obs[3])))*0.01
+reward -= abs(obs[0])*0.05
 ```
 `obs` is the state received from the environment. Absolute is taken to penalize getting away from the center with a small scalar magnitude.
 
 **NOTE**: *Replay Buffer Code in utils.py is taken from Udacity's [Course Code](https://github.com/udacity/deep-reinforcement-learning/blob/master/dqn/solution/dqn_agent.py).*
 
 ## Requirements
+
+The Project uses the following libraries:
+1. Pytorch
+2. Tensorboard
+3. OpenAI-Gym
+4. OpenCV-Python
+5. Numpy
+6. Box2d-Py(For Google Colab)
 
 Use the requirements.txt file to install the required libraries for this project.
 
