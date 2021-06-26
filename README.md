@@ -18,6 +18,14 @@ Any of the four methods can be used in this project:
 |:-------------------------:|
 |![](assets/before-training.gif)| 
 
+|DQN                         |Double DQN                  |
+|:--------------------------:|:--------------------------:|
+|![](assets/dqn.gif)         |![](assets/double-dqn.gif)  | 
+|Dueling DQN                 |Double Dueling DQN          |
+|:--------------------------:|:--------------------------:|
+|![](assets/dueling-dqn.gif) |![](assets/dueling-ddqn.gif)| 
+
+
 ## Environment
 
 The Agent's interaction with the Environment is based on the following four discrete actions:
@@ -132,6 +140,12 @@ python3 main.py --test_mode=TEST --agent_mode=SIMPLE --network_mode=DUELING
 # For Double Dueling DQN
 python3 main.py --test_mode=TEST --agent_mode=DOUBLE --network_mode=DUELING
 ```
+
+## Results
+
+|Average Reward             |
+|:-------------------------:|
+|![](assets/results.png)    | 
 
 ### For Visualizing the Training using Tensorboard
 ```bash

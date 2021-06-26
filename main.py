@@ -9,24 +9,28 @@ ENV = "LunarLander-v2"
 
 def run(params):
     env = gym.make(ENV)
+    
     agent = Agent(input_dims=env.observation_space.shape, n_actions=env.action_space.n, seed=params['seed'], agent_mode=params['agent_mode'], network_mode=params['network_mode'], test_mode=params['test_mode'], batch_size=params['batch_size'], n_epochs=params['n_epochs'], update_every=params['update_every'], lr=params['lr'], fc1_dims=params['fc1_dims'], fc2_dims=params['fc2_dims'], gamma=params['gamma'], epsilon=params['epsilon'], eps_end=params['eps_end'], eps_dec=params['eps_dec'], max_mem_size=params['max_mem_size'], tau=params['tau'])
     
-    if not os.path.isdir(f'videos'):
-            os.makedirs(f'videos')
-    result = cv2.VideoWriter(f'./videos/{agent.agent_name}.avi',
-                         cv2.VideoWriter_fourcc(*'MJPG'),
-                         60, (600,400))
+    if not os.path.isdir(f'videos'): os.makedirs(f'videos')
+    if params['test_mode']:
+        result = cv2.VideoWriter(f'./videos/{agent.agent_name}.avi',
+                             cv2.VideoWriter_fourcc(*'MJPG'),
+                             60, (600,400))
     
     load_checkpoint = os.path.exists(f'./models/{agent.agent_name}/{agent.agent_name}_EVAL.pth') and os.path.exists(f'./models/{agent.agent_name}/{agent.agent_name}_TARGET.pth')
+    
     if load_checkpoint:
         agent.load_model()
         
     average_reward, best_avg = 0, -1000
     scores, eps_history = [], []
+    
     n_games = params['n_games']
     n_steps = 0
     limit_steps = params['limit_steps']
     scores_window = params['scores_window']
+    
     for i in range(n_games):
         score = 0
         obs = env.reset()
@@ -42,13 +46,14 @@ def run(params):
             # Range is [-1.00 to +1.00] with center at zero to maximize efficiency
             reward -= abs(obs[0])*0.05
             score += reward
+            
             if not params['test_mode']:
                 agent.step(obs, action, reward, next_obs, done)
             else:
                 frame_ = env.render(mode="rgb_array")
                 frame = cv2.cvtColor(frame_, cv2.COLOR_RGB2BGR) 
                 font = cv2.FONT_HERSHEY_SIMPLEX
-                frame = cv2.putText(frame,f'{agent.agent_name}',(450,20), font, 0.6, (0,165,255), 2, cv2.LINE_AA)
+                frame = cv2.putText(frame,f'{agent.agent_name}',(375,20), font, 0.6, (0,165,255), 2, cv2.LINE_AA)
                 frame = cv2.putText(frame,f'Episode: {i}',(10,20), font, 0.75, (0,165,255), 2, cv2.LINE_AA)
                 frame = cv2.putText(frame,f'Score: {score:.2f}',(10,60), font, 0.75, (0,165,255), 2, cv2.LINE_AA)
                 if len(scores)>0:
@@ -76,10 +81,11 @@ def run(params):
     if not params['test_mode']:
         agent.tensorboard_writer.close()
     env.close()
-    result.release()
-
-    # Closes all the frames
-    cv2.destroyAllWindows()
+    
+    if params['test_mode']:
+        result.release()
+        # Closes all the frames
+        cv2.destroyAllWindows()
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Solving Lunar Lander using Deep Q Network',formatter_class=argparse.ArgumentDefaultsHelpFormatter)
