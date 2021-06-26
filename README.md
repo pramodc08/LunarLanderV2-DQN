@@ -19,10 +19,8 @@ Any of the four methods can be used in this project:
 |![](assets/before-training.gif)| 
 
 |DQN                         |Double DQN                  |
-|:--------------------------:|:--------------------------:|
 |![](assets/dqn.gif)         |![](assets/double-dqn.gif)  | 
 |Dueling DQN                 |Double Dueling DQN          |
-|:--------------------------:|:--------------------------:|
 |![](assets/dueling-dqn.gif) |![](assets/dueling-ddqn.gif)| 
 
 
